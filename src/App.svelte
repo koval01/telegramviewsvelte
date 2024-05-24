@@ -3,9 +3,11 @@
     import routes from './routes'
 
     import 'framework7/css/bundle'
+    import 'framework7-icons'
 
     const f7Params = {
         theme: "ios",
+        darkMode: "dark",
         routes,
         popup: {
             closeOnEscape: true,

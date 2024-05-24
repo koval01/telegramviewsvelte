@@ -4,7 +4,7 @@ import NotFound from './pages/404.svelte'
 
 export default [
     {
-        path: '/',
+        path: '/:channelId',
         component: Home,
     },
     {
