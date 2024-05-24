@@ -9,8 +9,7 @@ export default defineConfig({
       ecma: 5,
       compress: {
         unsafe: true,
-        drop_console: true,
-        booleans_as_integers: true
+        drop_console: true
       },
       format: {
         ascii_only: true
