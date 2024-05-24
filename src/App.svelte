@@ -5,6 +5,8 @@
     import 'framework7/css/bundle'
     import 'framework7-icons'
 
+    import './telegram.css'
+
     const f7Params = {
         theme: "ios",
         darkMode: "dark",

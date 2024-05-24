@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import axios from 'axios';
-    import { Page, Navbar, Block, BlockTitle, Icon } from 'framework7-svelte';
+    import { Page, Navbar, NavLeft, NavTitle, NavRight, Block, Icon } from 'framework7-svelte';
     import dayjs from 'dayjs';
     import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -50,22 +50,25 @@
 </style>
 
 <Page>
-    <Navbar title={channel.title ? channel.title : 'Feed'} transparent large></Navbar>
+    <Navbar>
+        <NavLeft>
+            {#if channel.avatar}
+                <img class="w-8 h-8 rounded-full" src={channel.avatar} alt="Avatar" />
+            {/if}
+        </NavLeft>
+        <NavTitle subtitle={channel.counters?.subscribers ? `${channel.counters?.subscribers} subscribers` : ''}>
+            {channel.title ? channel.title : channelId}
+        </NavTitle>
+        <NavRight>
+            <div></div>
+        </NavRight>
+    </Navbar>
 
     {#if loading}
         <Block>
             <p>Loading...</p>
         </Block>
     {:else}
-        <!-- <Block>
-            <div class="tweet-avatar">
-                <img src={channel.avatar} alt="Avatar" />
-            </div>
-            <h1>{channel.username}</h1>
-            <p>{channel.description}</p>
-            <p>Subscribers: {channel.counters?.subscribers}</p>
-        </Block> -->
-
         <div class="md:mx-12 lg:mx-24 xl:mx-48 2xl:mx-96 mt-8">
             {#each posts as post}
                 <div class="flex p-4 bg-transparent first:border-none border-t border-solid border-zinc-700">

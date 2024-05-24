@@ -1,0 +1,14 @@
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    background-size: 1.25em 1.25em;
+    text-indent: -10em;
+    font-style: normal;
+    padding: 3px 3px 3px 2px;
+    margin: -3px 0;
+    vertical-align: middle;
+}
