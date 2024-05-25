@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import axios from 'axios';
-    import { Page, Navbar, NavLeft, NavTitle, NavRight, Icon } from 'framework7-svelte';
+    import { Page, Navbar, NavLeft, NavTitle, NavRight, Icon, Block } from 'framework7-svelte';
     import dayjs from 'dayjs';
     import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -58,10 +58,10 @@
 </script>
 
 <Page infinite infiniteDistance={50} infinitePreloader={showPreloader} onInfinite={loadMore}>
-    <Navbar>
+    <Navbar class="!select-none">
         <NavLeft>
             {#if channel.avatar}
-                <img class="w-8 h-8 rounded-full" src={channel.avatar} alt="Avatar" />
+                <img class="w-8 h-8 rounded-full" src={channel.avatar} alt="Avatar" draggable="false" />
             {/if}
         </NavLeft>
         <NavTitle subtitle={channel.counters?.subscribers ? `${channel.counters?.subscribers} subscribers` : ''}>
@@ -72,22 +72,47 @@
         </NavRight>
     </Navbar>
 
+    <Block class="flex" strong inset>
+        <div class="shrink-0">
+            {#if channel.avatar}
+                <img class="w-24 h-24 rounded-full" src={channel.avatar} alt="Avatar" draggable="false" />
+            {:else}
+                <div class="w-24 h-24 rounded-full bg-neutral-500"></div>
+            {/if}
+        </div>
+        <div class="ml-3 w-full">
+            <div class="text-2xl font-extrabold">{channel.title ? channel.title : channelId}</div>
+            <div class="text-xl text-neutral-400">{channel.username ? channel.username : ''}</div>
+            <div class="text-sm mt-3">{channel.description ? channel.description : ''}</div>
+            {#if channel.counters}
+                <div class="flex mt-4">
+                    {#each Object.entries(channel.counters) as [key, value]}
+                        <div class="mr-4">
+                            <div class="text-lg font-bold">{value}</div>
+                            <div class="text-neutral-500 text-sm">{key}</div>
+                        </div>
+                    {/each}
+                </div>
+            {/if}
+        </div>
+    </Block>
+
     {#if !loading}
         <div class="md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-[28vw] mt-8">
             {#each posts as post}
                 <div class="px-4 {post.forwarded ? 'py-6' : 'py-3'} bg-transparent first:border-none border-t border-solid border-neutral-700 relative hover:bg-neutral-900 transition-colors duration-200">
                     {#if post.forwarded}
-                        <div class="flex absolute left-[3.25rem] top-1">
+                        <div class="flex absolute left-[3.25rem] top-1 select-none">
                             <Icon f7="arrow_turn_left_down" size="16px" class="text-neutral-400 top-1" />
                             <span class="text-neutral-400 ml-1">{post.forwarded.name}</span>
                         </div>
                     {/if}
                     <div class="flex">
                         <div class="flex mr-2 shrink-0 relative top-1">
-                            <img class="w-12 h-12 rounded-full" src={channel.avatar} alt="Avatar" />
+                            <img class="w-12 h-12 rounded-full" src={channel.avatar} alt="Avatar" draggable="false" />
                         </div>
                         <div class="flex-1">
-                            <div class="flex items-center mb-2">
+                            <div class="flex items-center mb-2 select-none">
                                 <span class="mr-1 font-bold">{channel.title}</span>
                                 <span class="mr-1 text-neutral-400">{channel.username}</span>
                                 <span class="mr-1 text-neutral-400">·</span>
@@ -117,7 +142,7 @@
                                 {/if}
                             </div>
                         </div>
-                        <div class="text-sm text-neutral-400">
+                        <div class="text-sm text-neutral-400 select-none">
                             <span>
                                 <Icon f7="eye_fill" size="16px" class="!align-baseline" />
                                 {post.footer.views}
