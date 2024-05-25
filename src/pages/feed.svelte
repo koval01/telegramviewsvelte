@@ -75,7 +75,7 @@
     {#if !loading}
         <div class="md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-[28vw] mt-8">
             {#each posts as post}
-                <div class="px-4 {post.forwarded ? 'py-6' : 'py-3'} bg-transparent first:border-none border-t border-solid border-neutral-700 relative hover:bg-neutral-900 transition-colors duration-500">
+                <div class="px-4 {post.forwarded ? 'py-6' : 'py-3'} bg-transparent first:border-none border-t border-solid border-neutral-700 relative hover:bg-neutral-900 transition-colors duration-200">
                     {#if post.forwarded}
                         <div class="flex absolute left-[3.25rem] top-1">
                             <Icon f7="arrow_turn_left_down" size="16px" class="text-neutral-400 top-1" />
@@ -101,6 +101,17 @@
                                     {#each post.content.media as media}
                                         {#if media.type === 'image'}
                                             <img src={media.url} alt="Media" class="rounded-xl w-full {post.content?.text?.html ? 'mt-2' : ''}" draggable="false" />
+                                        {:else if media.type.includes('roundvideo', 'video')}
+                                            <video class="w-full {media.type === 'roundvideo' ? 'rounded-full' : 'rounded-xl'} {post.content?.text?.html ? 'mt-2' : ''}" poster={media.thumb} controls muted preload="auto">
+                                                <source src={media.url} type="video/mp4">
+                                                <track src={null} kind="captions" />
+                                                Your browser does not support the video element.
+                                            </video>
+                                        {:else if media.type === 'voice'}
+                                            <audio controls>
+                                                <source src={media.url} type="audio/ogg">
+                                                Your browser does not support the audio element.
+                                            </audio>
                                         {/if}
                                     {/each}
                                 {/if}
