@@ -1,9 +1,8 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import pluginPurgeCss from 'vite-plugin-purgecss-updated-v5'
 
 export default defineConfig({
-  plugins: [svelte(), pluginPurgeCss()],
+  plugins: [svelte()],
   build: {
     minify: 'terser',
     terserOptions: {
