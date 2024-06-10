@@ -27,7 +27,7 @@
     "framework7-icons": "^5.0.5",
     "framework7-svelte": "^8.3.3",
     "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
+    "tailwindcss": "^3.4.4",
     "terser": "^5.31.0"
   }
 }
